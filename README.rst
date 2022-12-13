@@ -27,7 +27,7 @@ Purus sit amet luctus venenatis lectus magna fringilla. Condimentum id venenatis
 
 Research publications
 ===============================
-1. 
+1. Slipchenko, E.A.; Boginskaya, I.A.; Safiullin, R.R.; Ryzhikov, I.A.; Sedova, M.V.; Afanasev, K.N.; Nechaeva, N.L.; Kurochkin, I.N.; Merzlikin, A.M.; Lagarkov, A.N. SERS Sensor for Human Glycated Albumin Direct Assay Based on Machine Learning Methods. Chemosensors 2022, 10, 520. https://doi.org/10.3390/chemosensors10120520
 
 Presentations at conferences on the topic of research
 ================================================
