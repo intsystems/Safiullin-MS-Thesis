@@ -25,9 +25,3 @@ Abstract
 
 We investigate the problem of forecasting one trajectory  by another. We have to find dependencies in complex structure signals using linear and nonlinear methods. To do this, it is proposed to reduce the dimension of the source and target space using private models and make model agreement procedure in the resulting latent space. In this work, we analyze several multi modeling methods for constructing a agreement function. The proposed solution include feature selection using quadratic programming approach and partial least squares method. Validation of the result will be carried out on signals from wearable devices.
 
-Research publications
-===============================
-1. Slipchenko, E.A.; Boginskaya, I.A.; Safiullin, R.R.; Ryzhikov, I.A.; Sedova, M.V.; Afanasev, K.N.; Nechaeva, N.L.; Kurochkin, I.N.; Merzlikin, A.M.; Lagarkov, A.N. SERS Sensor for Human Glycated Albumin Direct Assay Based on Machine Learning Methods. Chemosensors 2022, 10, 520. https://doi.org/10.3390/chemosensors10120520
-
-
-
