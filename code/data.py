@@ -20,7 +20,7 @@ def collect_data(df, num_features, num_channels):
     """
 
     
-    X_tensor = np.zeros((2* len(df.UserID.unique()) * len(df.UserID.unique()),3, 200))
+    X_tensor = np.zeros((int(len(df)/3),3, 200))
     index = 0
     to_select = []
     count = 0
@@ -30,42 +30,34 @@ def collect_data(df, num_features, num_channels):
         for activity in df.Activity.unique():
 
 
-                if df[(df.UserID==user) & (df.Activity==activity) ].shape[0]==6:
-                    count += 1
-                    for device in [0,1]:
-                        to_select.append([user,activity,device])
-                        if device==0:
-                                smart_indexes.append(index)
-                        else:
-                                watch_indexes.append(index)
-                        for axi_ind, axis in enumerate(['x','y','z']):
+                if (df[(df.UserID==user) & (df.Activity==activity) ].shape[0] % 6==0) &(df[(df.UserID==user) & (df.Activity==activity) ].shape[0] // 6>=14):
+                    for _ in range(int(df[(df.UserID==user) & (df.Activity==activity) ].shape[0] // 6)):
+
+                            count += 1
+                            
+                            for device in [0,1]:
+                                to_select.append([user,activity,device])
+                                if device==0:
+                                        smart_indexes.append(index)
+                                else:
+                                        watch_indexes.append(index)
+                                
+                                
+                                for axi_ind, axis in enumerate(['x','y','z']):
+                                        row = df[(df.Device==device)&(df.UserID==user) & (df.Activity==activity) &( 
+                                            df.Axis==axis)  ]
+                                        if row.shape==0:
+                                            print(row.shape,index,axis, user, activity, device)
 
 
-                            X_tensor[index,axi_ind,:] = (df[(df.Device==device)&(df.UserID==user) & (df.Activity==activity) &( 
-                                df.Axis==axis)  ].values[0][:200])
+                                        X_tensor[index,axi_ind,:] = (row.values[0][:200])
 
-                        index+=1
+                                index+=1
 
 
 
     return X_tensor, smart_indexes, watch_indexes
 
-
-
-def prepare_dataset(reconstructed_data_train, X_tensor, BATCH_SIZE):
-    """
-    Prepare dataset and dataloader for training.
-    
-    Parameters:
-    reconstructed_data_train (np.array): The training data reconstructed by the model.
-    X_tensor (np.array): The tensor data.
-    
-    Returns:
-    DataLoader: DataLoader for the training data.
-    """
-    dataset = TensorDataset(torch.tensor(reconstructed_data_train[1::2, :, :]).double(), torch.tensor(X_tensor[:808*2,:,:][1::2]).double())
-    train_loader = DataLoader(dataset, batch_size=BATCH_SIZE, shuffle=True)
-    return train_loader
 
 
 def min_max_normalize_data(data):
